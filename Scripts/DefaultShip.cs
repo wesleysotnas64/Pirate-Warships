@@ -11,6 +11,7 @@ public class DefaultShip : MonoBehaviour
     protected float CurrentSimpleReloadTime { get; set; }
     protected bool  Stunned { get; set; }
     protected State State { get; set; }
+    protected GameObject LifeBar { get; set; }
 
     protected void Navigate(float _speed)
     {
@@ -25,8 +26,8 @@ public class DefaultShip : MonoBehaviour
     protected void UpdateStatus()
     {
         float st = (float) CurrentLife / MaxLife;
-        if (st >= 0.5f) State = State.FullLife;
-        else if (st >= 0.3f) State = State.HalfLife;
+        if (st > 0.6f) State = State.FullLife;
+        else if (st > 0.3f) State = State.HalfLife;
         else if (st > 0) State = State.LowLife;
         else State = State.EmptyLife;
 

@@ -16,6 +16,8 @@ public class PlayerShip : DefaultShip
         CurrentHeavyReloadTime  = 0;
         Stunned = false;
         UpdateStatus();
+        LifeBar = Instantiate(Resources.Load<GameObject>("LifeBar"));
+        LifeBar.GetComponent<LifeBar>().ShipTransform = GetComponent<Transform>();
     }
 
     private void Update()
@@ -25,6 +27,14 @@ public class PlayerShip : DefaultShip
             if (Input.GetKey("w")) Navigate(Speed);
             if (Input.GetKey("a")) Rudder( CurveRadius);
             if (Input.GetKey("d")) Rudder(-CurveRadius);
+
+            if (Input.GetKeyDown("p"))
+            {
+                CurrentLife--;
+                UpdateStatus();
+                LifeBar.GetComponent<LifeBar>().UpdateScale((float)CurrentLife / MaxLife);
+            }
         }
+        if (CurrentLife <= 0) Stunned = true;
     }
 }

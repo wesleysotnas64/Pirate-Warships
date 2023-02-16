@@ -12,11 +12,6 @@ public class Cannon : MonoBehaviour
         ProjectilPrefab = Resources.Load<GameObject>("Projectile");
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown("space")) Shoot();
-    }
-
     public void Shoot()
     {
         Instantiate(ProjectilPrefab, transform.position, transform.rotation);
