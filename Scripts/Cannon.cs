@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Cannon : MonoBehaviour
 {
-    private GameObject ProjectilPrefab;
+    public GameObject ProjectilPrefab;
 
     private void Awake()
     {

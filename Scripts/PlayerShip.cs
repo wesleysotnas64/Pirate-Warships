@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class PlayerShip : DefaultShip
 {
-    private float HeavyReloadTime { get; set; }
-    private float CurrentHeavyReloadTime { get; set; }
+    public float HeavyReloadTime { get; set; }
+    public float CurrentHeavyReloadTime { get; set; }
 
     private void Start()
     {
         MaxLife = 10;
         CurrentLife = MaxLife;
-        Speed = 1;
+        Speed = 2;
         CurveRadius = 45;
         SimpleReloadTime = 1;
         HeavyReloadTime  = 5;
@@ -26,8 +26,8 @@ public class PlayerShip : DefaultShip
         Cannons = new List<GameObject>();
         for(int i = 0; i < 7; i++)
         {
-            GameObject cannnon = gameObject.transform.GetChild(i).gameObject;
-            Cannons.Add(cannnon);
+            GameObject cannon = gameObject.transform.GetChild(i).gameObject;
+            Cannons.Add(cannon);
         }
     }
 
@@ -35,7 +35,7 @@ public class PlayerShip : DefaultShip
     {
         if (!Stunned)
         {
-            if (Input.GetKey("w")) Navigate(Speed);
+            if (Input.GetKey("w")) Navigate();
             if (Input.GetKey("a")) Rudder( CurveRadius);
             if (Input.GetKey("d")) Rudder(-CurveRadius);
 

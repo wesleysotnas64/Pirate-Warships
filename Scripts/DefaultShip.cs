@@ -15,9 +15,9 @@ public class DefaultShip : MonoBehaviour
     protected GameObject LifeBar { get; set; }
     protected List<GameObject> Cannons {get; set;}
 
-    protected void Navigate(float _speed)
+    protected void Navigate()
     {
-        transform.Translate(0, -_speed * Time.deltaTime, 0);
+        transform.Translate(0, Speed * Time.deltaTime, 0);
     }
 
     protected void Rudder(float _curveRadius)

@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
     {
         float vel = speed * Time.deltaTime;
         currentDistance += vel;
-        transform.Translate(vel, 0, 0);
+        transform.Translate(0, vel, 0);
 
         VerifyLimit();
     }
