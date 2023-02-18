@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShip : DefaultShip
@@ -16,11 +17,18 @@ public class PlayerShip : DefaultShip
         CurrentSimpleReloadTime = 0;
         CurrentHeavyReloadTime  = 0;
         Stunned = false;
-        
+
         UpdateStatus();
 
         LifeBar = Instantiate(Resources.Load<GameObject>("LifeBar"));
         LifeBar.GetComponent<LifeBar>().ShipTransform = GetComponent<Transform>();
+
+        Cannons = new List<GameObject>();
+        for(int i = 0; i < 7; i++)
+        {
+            GameObject cannnon = gameObject.transform.GetChild(i).gameObject;
+            Cannons.Add(cannnon);
+        }
     }
 
     private void Update()
@@ -37,6 +45,12 @@ public class PlayerShip : DefaultShip
                 UpdateStatus();
                 LifeBar.GetComponent<LifeBar>().UpdateScale((float)CurrentLife / MaxLife);
             }
+
+            if (Input.GetKeyDown("i")) Cannons[0].GetComponent<Cannon>().Shoot();
+            if (Input.GetKeyDown("j"))
+                for (int i = 1; i < 4; i++)  Cannons[i].GetComponent<Cannon>().Shoot();
+            if (Input.GetKeyDown("l"))
+                for (int i = 4; i < 7; i++)  Cannons[i].GetComponent<Cannon>().Shoot();
         }
         if (CurrentLife <= 0) Stunned = true;
     }
