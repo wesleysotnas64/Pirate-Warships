@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LifeBar : MonoBehaviour
 {
     public Transform ShipTransform;
     public Transform ChildLifeBar;
+    public Vector3   FullLifeColor;
+    public Vector3   HalfLifeColor;
+    public Vector3   EmptyLifeColor;
+    public Vector3   CurrentLifeColor;
+    public float     yOffset;
     public SpriteRenderer ChildSprite;
-    public Vector3 FullLifeColor;
-    public Vector3 HalfLifeColor;
-    public Vector3 EmptyLifeColor;
-    public Vector3 CurrentLifeColor;
-    public float yOffset;
 
     private void Awake()
     {
@@ -43,17 +41,17 @@ public class LifeBar : MonoBehaviour
         UpdateColor(scale);
     }
 
-    private void UpdateColor(float interpol)
+    private void UpdateColor(float interpolation)
     {
-        if (interpol > 0.5f)
+        if (interpolation > 0.5f)
         {
-            interpol = (interpol-0.5f)/0.5f;
-            CurrentLifeColor = Vector3.Lerp(HalfLifeColor, FullLifeColor, interpol);
+            interpolation    = (interpolation-0.5f)/0.5f;
+            CurrentLifeColor = Vector3.Lerp(HalfLifeColor, FullLifeColor, interpolation);
         }
         else
         {
-            interpol = interpol / 0.5f;
-            CurrentLifeColor = Vector3.Lerp(EmptyLifeColor, HalfLifeColor, interpol);
+            interpolation    = interpolation / 0.5f;
+            CurrentLifeColor = Vector3.Lerp(EmptyLifeColor, HalfLifeColor, interpolation);
         }
 
         ChildSprite.color = new Color

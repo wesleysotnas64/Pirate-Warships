@@ -4,6 +4,7 @@ public class PlayerShip : DefaultShip
 {
     private float HeavyReloadTime { get; set; }
     private float CurrentHeavyReloadTime { get; set; }
+
     private void Start()
     {
         MaxLife = 10;
@@ -15,7 +16,9 @@ public class PlayerShip : DefaultShip
         CurrentSimpleReloadTime = 0;
         CurrentHeavyReloadTime  = 0;
         Stunned = false;
+        
         UpdateStatus();
+
         LifeBar = Instantiate(Resources.Load<GameObject>("LifeBar"));
         LifeBar.GetComponent<LifeBar>().ShipTransform = GetComponent<Transform>();
     }
