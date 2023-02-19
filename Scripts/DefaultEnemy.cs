@@ -11,6 +11,7 @@ public class DefaultEnemy : DefaultShip
     {
         if (!Sensors[0].Active && !Sensors[1].Active)
         {
+            Stunned = false;
             PlayerTransform = GameObject.Find("Player").GetComponent<Transform>();
             PlayerDirection = (PlayerTransform.position-transform.position).normalized;
 
@@ -18,10 +19,12 @@ public class DefaultEnemy : DefaultShip
         }
         else
         {
+            Stunned = true;
             if (Sensors[0].Active && !Sensors[1].Active)
-                Rudder(CurveRadius);
-            else if (!Sensors[0].Active && Sensors[1].Active)
                 Rudder(-CurveRadius);
+            else if (!Sensors[0].Active && Sensors[1].Active)
+                Rudder(CurveRadius);
+
         }
     }
 }

@@ -28,7 +28,8 @@ public class ChaserEnemy : DefaultEnemy
     // Update is called once per frame
     void Update()
     {
-        Navigate();
+        if (!Stunned)
+            Navigate();
         UpdateDirection();
         AlertEffect();
     }
