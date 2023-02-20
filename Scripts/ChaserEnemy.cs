@@ -4,6 +4,7 @@ using UnityEngine;
 public sealed class ChaserEnemy : DefaultEnemy
 {
     private float angle;
+    private AudioSource alertSound;
 
     void Start()
     {
@@ -11,8 +12,6 @@ public sealed class ChaserEnemy : DefaultEnemy
         currentLife = maxLife;
         speed = 1;
         curveRadius = 45;
-        
-        
 
         lifeBar = Instantiate(Resources.Load<GameObject>("LifeBar"));
         lifeBar.GetComponent<LifeBar>().ShipTransform = GetComponent<Transform>();
@@ -23,6 +22,9 @@ public sealed class ChaserEnemy : DefaultEnemy
             Sensor sensor = gameObject.transform.GetChild(i).gameObject.GetComponent<Sensor>();
             sensors.Add(sensor);
         }
+
+        alertSound = GetComponent<AudioSource>();
+        alertSound.volume = 0.1f;
     }
 
     void Update()
@@ -41,5 +43,7 @@ public sealed class ChaserEnemy : DefaultEnemy
         float sinWave = (Mathf.Sin(angle)+1)/2;
 
         sr.color = new Color(1, sinWave, sinWave, 1);
+
+        if(1-sinWave > 0.9f) alertSound.Play(0);
     }
 }
