@@ -1,20 +1,21 @@
 using UnityEngine;
 
-public class Cannon : MonoBehaviour
+public sealed class Cannon : MonoBehaviour
 {
-    public GameObject  ProjectilPrefab { get; set; }
-    public AudioSource ShotSound { get; set; }
+    private GameObject  projectilPrefab;
+    private AudioSource shotSound;
 
     private void Awake()
     {
-        ProjectilPrefab = Resources.Load<GameObject>("Projectile");
-        ShotSound = GetComponent<AudioSource>();
-        ShotSound.volume = 0.025f;
+        projectilPrefab = Resources.Load<GameObject>("Projectile");
+
+        shotSound = GetComponent<AudioSource>();
+        shotSound.volume = 0.025f;
     }
 
     public void Shoot()
     {
-        Instantiate(ProjectilPrefab, transform.position, transform.rotation);
-        ShotSound.Play(0);
+        Instantiate(projectilPrefab, transform.position, transform.rotation);
+        shotSound.Play(0);
     }
 }

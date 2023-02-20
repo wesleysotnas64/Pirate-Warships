@@ -1,57 +1,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShip : DefaultShip
+public sealed class PlayerShip : DefaultShip
 {
-    public float HeavyReloadTime { get; set; }
-    public float CurrentHeavyReloadTime { get; set; }
+    private float heavyReloadTime;
+    private float currentHeavyReloadTime;
 
     private void Start()
     {
-        MaxLife = 10;
-        CurrentLife = MaxLife;
-        Speed = 2;
-        CurveRadius = 45;
-        SimpleReloadTime = 1;
-        HeavyReloadTime  = 5;
-        CurrentSimpleReloadTime = 0;
-        CurrentHeavyReloadTime  = 0;
-        Stunned = false;
+        maxLife = 10;
+        currentLife = maxLife;
+        speed = 2;
+        curveRadius = 45;
+        simpleReloadTime = 1;
+        heavyReloadTime  = 5;
+        currentSimpleReloadTime = 0;
+        currentHeavyReloadTime  = 0;
+        stunned = false;
 
         UpdateStatus();
 
-        LifeBar = Instantiate(Resources.Load<GameObject>("LifeBar"));
-        LifeBar.GetComponent<LifeBar>().ShipTransform = GetComponent<Transform>();
+        lifeBar = Instantiate(Resources.Load<GameObject>("LifeBar"));
+        lifeBar.GetComponent<LifeBar>().ShipTransform = GetComponent<Transform>();
 
-        Cannons = new List<GameObject>();
+        cannons = new List<GameObject>();
         for(int i = 0; i < 7; i++)
         {
             GameObject cannon = gameObject.transform.GetChild(i).gameObject;
-            Cannons.Add(cannon);
+            cannons.Add(cannon);
         }
     }
 
     private void Update()
     {
-        if (!Stunned)
+        if (!stunned)
         {
             if (Input.GetKey("w")) Navigate();
-            if (Input.GetKey("a")) Rudder( CurveRadius);
-            if (Input.GetKey("d")) Rudder(-CurveRadius);
+            if (Input.GetKey("a")) Rudder( curveRadius);
+            if (Input.GetKey("d")) Rudder(-curveRadius);
 
             if (Input.GetKeyDown("p"))
             {
-                CurrentLife--;
+                currentLife--;
                 UpdateStatus();
-                LifeBar.GetComponent<LifeBar>().UpdateScale((float)CurrentLife / MaxLife);
+                lifeBar.GetComponent<LifeBar>().UpdateScale((float)currentLife / maxLife);
             }
 
-            if (Input.GetKeyDown("i")) Cannons[0].GetComponent<Cannon>().Shoot();
+            if (Input.GetKeyDown("i")) cannons[0].GetComponent<Cannon>().Shoot();
             if (Input.GetKeyDown("j"))
-                for (int i = 1; i < 4; i++)  Cannons[i].GetComponent<Cannon>().Shoot();
+                for (int i = 1; i < 4; i++)  cannons[i].GetComponent<Cannon>().Shoot();
             if (Input.GetKeyDown("l"))
-                for (int i = 4; i < 7; i++)  Cannons[i].GetComponent<Cannon>().Shoot();
+                for (int i = 4; i < 7; i++)  cannons[i].GetComponent<Cannon>().Shoot();
         }
-        if (CurrentLife <= 0) Stunned = true;
+        if (currentLife <= 0) stunned = true;
     }
 }

@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public sealed class Projectile : MonoBehaviour
 {
-    public float speed { get; set; }
-    public float maxDistance { get; set; }
-    public float currentDistance { get; set; }
+    private float speed;
+    private float maxDistance;
+    private float currentDistance;
 
     private void Start()
     {
-        speed = 2;
-        maxDistance = 2;
+        speed = 3;
+        maxDistance = 4;
         currentDistance = 0;
     }
 

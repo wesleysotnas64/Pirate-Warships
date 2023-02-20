@@ -2,9 +2,9 @@ namespace Enum
 {
     public enum State
     {
-        FullLife  = 1,
-        HalfLife  = 2,
-        LowLife   = 3,
-        EmptyLife = 4
+        fullLife  = 1,
+        halfLife  = 2,
+        lowLife   = 3,
+        emptyLife = 4
     }
 }

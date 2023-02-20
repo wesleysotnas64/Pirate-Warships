@@ -1,43 +1,43 @@
 using UnityEngine;
 
-public class LifeBar : MonoBehaviour
+public sealed class LifeBar : MonoBehaviour
 {
-    public Transform ShipTransform;
-    public Transform ChildLifeBar;
-    public Vector3   FullLifeColor;
-    public Vector3   HalfLifeColor;
-    public Vector3   EmptyLifeColor;
-    public Vector3   CurrentLifeColor;
-    public float     yOffset;
-    public SpriteRenderer ChildSprite;
+    private Transform shipTransform;
+    private Transform childLifeBar;
+    private Vector3   fullLifeColor;
+    private Vector3   halfLifeColor;
+    private Vector3   emptyLifeColor;
+    private Vector3   currentLifeColor;
+    private float     yOffset;
+    private SpriteRenderer childSprite;
 
     private void Awake()
     {
-        FullLifeColor  = new Vector3(0, 1, 0);
-        HalfLifeColor  = new Vector3(1, 1, 0);
-        EmptyLifeColor = new Vector3(1, 0, 0);
+        fullLifeColor  = new Vector3(0, 1, 0);
+        halfLifeColor  = new Vector3(1, 1, 0);
+        emptyLifeColor = new Vector3(1, 0, 0);
         yOffset = 0.7f;
-        ChildLifeBar = gameObject.transform.GetChild(0);
-        ChildSprite  = ChildLifeBar.gameObject.GetComponent<SpriteRenderer>();
+        childLifeBar = gameObject.transform.GetChild(0);
+        childSprite  = childLifeBar.gameObject.GetComponent<SpriteRenderer>();
         UpdateColor(1);
     }
 
     private void Update()
     {
-        if(ChildLifeBar != null)
+        if(childLifeBar != null)
         {
            transform.position = new Vector3
             (
-                ShipTransform.position.x,
-                ShipTransform.position.y + yOffset,
-                ShipTransform.position.z
+                shipTransform.position.x,
+                shipTransform.position.y + yOffset,
+                shipTransform.position.z
             );
         }
     }
 
     public void UpdateScale(float scale)
     {
-        ChildLifeBar.localScale = new Vector3(scale, 1, 1);
+        childLifeBar.localScale = new Vector3(scale, 1, 1);
         UpdateColor(scale);
     }
 
@@ -46,20 +46,26 @@ public class LifeBar : MonoBehaviour
         if (interpolation > 0.5f)
         {
             interpolation    = (interpolation-0.5f)/0.5f;
-            CurrentLifeColor = Vector3.Lerp(HalfLifeColor, FullLifeColor, interpolation);
+            currentLifeColor = Vector3.Lerp(halfLifeColor, fullLifeColor, interpolation);
         }
         else
         {
             interpolation    = interpolation / 0.5f;
-            CurrentLifeColor = Vector3.Lerp(EmptyLifeColor, HalfLifeColor, interpolation);
+            currentLifeColor = Vector3.Lerp(emptyLifeColor, halfLifeColor, interpolation);
         }
 
-        ChildSprite.color = new Color
+        childSprite.color = new Color
         (
-            CurrentLifeColor.x,
-            CurrentLifeColor.y,
-            CurrentLifeColor.z,
+            currentLifeColor.x,
+            currentLifeColor.y,
+            currentLifeColor.z,
             1
         );
+    }
+
+    public Transform ShipTransform
+    {
+        get { return this.shipTransform;  }
+        set { this.shipTransform = value; }
     }
 }

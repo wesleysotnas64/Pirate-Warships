@@ -4,20 +4,20 @@ using Enum;
 
 public class DefaultShip : MonoBehaviour
 {
-    protected int   MaxLife { get; set; }
-    protected int   CurrentLife { get; set; }
-    protected float Speed { get; set; }
-    protected float CurveRadius { get; set; }
-    protected float SimpleReloadTime { get; set; }
-    protected float CurrentSimpleReloadTime { get; set; }
-    protected bool  Stunned { get; set; }
-    protected State State { get; set; }
-    protected GameObject LifeBar { get; set; }
-    protected List<GameObject> Cannons {get; set;}
+    protected int   maxLife { get; set; }
+    protected int   currentLife { get; set; }
+    protected float speed { get; set; }
+    protected float curveRadius { get; set; }
+    protected float simpleReloadTime { get; set; }
+    protected float currentSimpleReloadTime { get; set; }
+    protected bool  stunned { get; set; }
+    protected State state { get; set; }
+    protected GameObject lifeBar { get; set; }
+    protected List<GameObject> cannons {get; set;}
 
     protected void Navigate()
     {
-        transform.Translate(0, Speed * Time.deltaTime, 0);
+        transform.Translate(0, speed * Time.deltaTime, 0);
     }
 
     protected void Rudder(float _curveRadius)
@@ -27,13 +27,13 @@ public class DefaultShip : MonoBehaviour
 
     protected void UpdateStatus()
     {
-        float st = (float) CurrentLife / MaxLife;
+        float st = (float) currentLife / maxLife;
 
-        if (st > 0.6f) State = State.FullLife;
-        else if (st > 0.3f) State = State.HalfLife;
-        else if (st > 0) State = State.LowLife;
-        else State = State.EmptyLife;
+        if (st > 0.6f) state = State.fullLife;
+        else if (st > 0.3f) state = State.halfLife;
+        else if (st > 0) state = State.lowLife;
+        else state = State.emptyLife;
 
-        GetComponent<Animator>().SetInteger("State", (int) State);
+        GetComponent<Animator>().SetInteger("State", (int) state);
     }
 }

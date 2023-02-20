@@ -1,22 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Sensor : MonoBehaviour
+public sealed class Sensor : MonoBehaviour
 {
-    public bool Active { get; set; }
+    private bool active;
+
+    [SerializeField]
+    private Sensor mirroredSensor;
 
     private void Start() {
-        Active = false;
+        active = false;
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        Active = true;
+        if (!mirroredSensor.Active)
+            active = true;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        Active = false;
+        if (!mirroredSensor.Active)
+            active = false;
+    }
+
+    public bool Active
+    {
+        get { return this.active; }
     }
 }
