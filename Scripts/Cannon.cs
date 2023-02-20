@@ -12,9 +12,13 @@ public sealed class Cannon : MonoBehaviour
     [SerializeField]
     private float projectilePower;
 
-    private void Awake()
+    private void Start()
     {
-        projectilPrefab = Resources.Load<GameObject>("Projectile");
+        string parent = transform.parent.tag;
+        if (parent == "Player")
+            projectilPrefab = Resources.Load<GameObject>("PlayerProjectile");
+        else
+            projectilPrefab = Resources.Load<GameObject>("EnemyProjectile");
 
         shotSound = GetComponent<AudioSource>();
         shotSound.volume = 0.025f;

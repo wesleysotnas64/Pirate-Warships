@@ -8,7 +8,7 @@ public sealed class PlayerShip : DefaultShip
         maxLife = 10;
         currentLife = maxLife;
         speed = 2;
-        curveRadius = 45;
+        curveRadius = 60;
         stunned = false;
 
         UpdateStatus();
@@ -34,9 +34,7 @@ public sealed class PlayerShip : DefaultShip
 
             if (Input.GetKeyDown("p"))
             {
-                currentLife--;
-                UpdateStatus();
-                lifeBar.GetComponent<LifeBar>().UpdateScale((float)currentLife / maxLife);
+                Damage(1);
             }
 
             if (Input.GetKeyDown("i")) cannons[0].GetComponent<Cannon>().Shoot();
@@ -45,6 +43,24 @@ public sealed class PlayerShip : DefaultShip
             if (Input.GetKeyDown("l"))
                 for (int i = 4; i < 7; i++)  cannons[i].GetComponent<Cannon>().Shoot();
         }
-        if (currentLife <= 0) stunned = true;
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!stunned)
+        {
+            string tag = other.gameObject.tag;
+            switch (tag)
+            {
+                case "EnemyProjectile":
+                    Damage(1);
+                    break;
+                
+                case "Enemy":
+                    Damage(3);
+                    break;
+            }
+        }
     }
 }

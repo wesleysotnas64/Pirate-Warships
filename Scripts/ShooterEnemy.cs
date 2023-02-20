@@ -10,6 +10,7 @@ public sealed class ShooterEnemy : DefaultEnemy
         currentLife = maxLife;
         speed = 0.75f;
         curveRadius = 45;
+        stunned = false;
 
         lifeBar = Instantiate(Resources.Load<GameObject>("LifeBar"));
         lifeBar.GetComponent<LifeBar>().ShipTransform = GetComponent<Transform>();
@@ -28,11 +29,14 @@ public sealed class ShooterEnemy : DefaultEnemy
 
     void Update()
     {
-        if (!OnTarget())
-            Navigate();
-        else
-            cannons[0].GetComponent<Cannon>().Shoot();
-        UpdateDirection();
+        if(!stunned)
+        {
+            if (!OnTarget())
+                Navigate();
+            else
+                cannons[0].GetComponent<Cannon>().Shoot();
+            UpdateDirection();
+        }
     }
 
     private bool OnTarget()

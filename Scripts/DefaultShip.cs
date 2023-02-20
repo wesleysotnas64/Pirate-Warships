@@ -32,6 +32,20 @@ public class DefaultShip : MonoBehaviour
         else if (st > 0) state = State.lowLife;
         else state = State.emptyLife;
 
-        GetComponent<Animator>().SetInteger("State", (int) state);
+        if (currentLife <= 0) stunned = true;
+
+        try
+        {
+            GetComponent<Animator>().SetInteger("State", (int) state);
+        }
+        catch
+        {}
+    }
+
+    protected void Damage(int _damage)
+    {
+        currentLife -= _damage;
+        UpdateStatus();
+        lifeBar.GetComponent<LifeBar>().UpdateScale((float)currentLife / maxLife);
     }
 }

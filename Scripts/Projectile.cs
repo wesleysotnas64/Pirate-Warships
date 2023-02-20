@@ -38,4 +38,8 @@ public sealed class Projectile : MonoBehaviour
         speed = _projectilePower;
         maxDistance = _projectilePower/2;
     }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        Destroy(this.gameObject);
+    }
 }

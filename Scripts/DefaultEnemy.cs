@@ -24,4 +24,22 @@ public class DefaultEnemy : DefaultShip
                 Rudder(curveRadius);
         }
     }
+
+    protected void OnCollisionEnter2D(Collision2D other)
+    {
+        if (!stunned)
+        {
+            string tag = other.gameObject.tag;
+            switch (tag)
+            {
+                case "PlayerProjectile":
+                    Damage(1);
+                    break;
+
+                case "Player":
+                    Damage(currentLife);
+                    break;
+            }
+        }
+    }
 }

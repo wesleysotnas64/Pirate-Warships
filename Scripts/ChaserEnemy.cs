@@ -12,6 +12,7 @@ public sealed class ChaserEnemy : DefaultEnemy
         currentLife = maxLife;
         speed = 1;
         curveRadius = 45;
+        stunned = false;
 
         lifeBar = Instantiate(Resources.Load<GameObject>("LifeBar"));
         lifeBar.GetComponent<LifeBar>().ShipTransform = GetComponent<Transform>();
@@ -29,9 +30,12 @@ public sealed class ChaserEnemy : DefaultEnemy
 
     void Update()
     {
-        Navigate();
-        UpdateDirection();
-        AlertEffect();
+        if (!stunned)
+        {
+            Navigate();
+            UpdateDirection();
+            AlertEffect();
+        }
     }
 
     private void AlertEffect()
