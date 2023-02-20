@@ -8,8 +8,6 @@ public class DefaultShip : MonoBehaviour
     protected int   currentLife { get; set; }
     protected float speed { get; set; }
     protected float curveRadius { get; set; }
-    protected float simpleReloadTime { get; set; }
-    protected float currentSimpleReloadTime { get; set; }
     protected bool  stunned { get; set; }
     protected State state { get; set; }
     protected GameObject lifeBar { get; set; }

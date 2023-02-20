@@ -3,19 +3,12 @@ using UnityEngine;
 
 public sealed class PlayerShip : DefaultShip
 {
-    private float heavyReloadTime;
-    private float currentHeavyReloadTime;
-
     private void Start()
     {
         maxLife = 10;
         currentLife = maxLife;
         speed = 2;
         curveRadius = 45;
-        simpleReloadTime = 1;
-        heavyReloadTime  = 5;
-        currentSimpleReloadTime = 0;
-        currentHeavyReloadTime  = 0;
         stunned = false;
 
         UpdateStatus();

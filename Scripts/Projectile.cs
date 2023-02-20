@@ -6,10 +6,10 @@ public sealed class Projectile : MonoBehaviour
     private float maxDistance;
     private float currentDistance;
 
-    private void Start()
+    private void Awake()
     {
-        speed = 3;
-        maxDistance = 4;
+        speed = 0;
+        maxDistance = 0;
         currentDistance = 0;
     }
 
@@ -31,5 +31,11 @@ public sealed class Projectile : MonoBehaviour
     {
         if(currentDistance >= maxDistance)
             Destroy(this.gameObject);
+    }
+
+    public void SetProjectil(float _projectilePower)
+    {
+        speed = _projectilePower;
+        maxDistance = _projectilePower/2;
     }
 }
