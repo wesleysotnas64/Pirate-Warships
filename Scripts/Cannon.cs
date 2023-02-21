@@ -3,6 +3,7 @@ using UnityEngine;
 public sealed class Cannon : MonoBehaviour
 {
     private GameObject  projectilPrefab;
+    private GameObject  fireShot;
     private AudioSource shotSound;
 
     [SerializeField]
@@ -11,6 +12,7 @@ public sealed class Cannon : MonoBehaviour
 
     [SerializeField]
     private float projectilePower;
+    
 
     private void Start()
     {
@@ -19,6 +21,8 @@ public sealed class Cannon : MonoBehaviour
             projectilPrefab = Resources.Load<GameObject>("PlayerProjectile");
         else
             projectilPrefab = Resources.Load<GameObject>("EnemyProjectile");
+
+        fireShot = Resources.Load<GameObject>("Fire");
 
         shotSound = GetComponent<AudioSource>();
         shotSound.volume = 0.025f;
@@ -39,6 +43,11 @@ public sealed class Cannon : MonoBehaviour
             GameObject projectil = Instantiate(projectilPrefab, transform.position, transform.rotation);
             projectil.GetComponent<Projectile>().SetProjectil(projectilePower);
             shotSound.Play(0);
+
+            GameObject fire = Instantiate(fireShot, transform.position, transform.rotation);
+            fire.transform.parent = gameObject.transform;
+            fire.transform.Translate(0,0.2f,0);
+            
         }
     }
 }

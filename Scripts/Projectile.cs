@@ -5,12 +5,15 @@ public sealed class Projectile : MonoBehaviour
     private float speed;
     private float maxDistance;
     private float currentDistance;
+    private GameObject explosion;
 
     private void Awake()
     {
         speed = 0;
         maxDistance = 0;
         currentDistance = 0;
+        
+        explosion = Resources.Load<GameObject>("Explosion");
     }
 
     private void FixedUpdate()
@@ -40,6 +43,7 @@ public sealed class Projectile : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
+        Instantiate(explosion, transform.position, transform.rotation);
         Destroy(this.gameObject);
     }
 }
