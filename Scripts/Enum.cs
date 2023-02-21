@@ -7,4 +7,10 @@ namespace Enum
         lowLife   = 3,
         emptyLife = 4
     }
+
+    public enum Enemy
+    {
+        chaserEnemy = 1,
+        shooterEnemy = 2
+    }
 }
