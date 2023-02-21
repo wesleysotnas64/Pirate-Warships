@@ -12,6 +12,8 @@ public class DefaultShip : MonoBehaviour
     protected State state { get; set; }
     protected GameObject lifeBar { get; set; }
     protected List<GameObject> cannons {get; set;}
+    protected float angleEffect;
+    protected AudioSource sound;
 
     protected void Navigate()
     {

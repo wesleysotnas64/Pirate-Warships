@@ -3,8 +3,6 @@ using UnityEngine;
 
 public sealed class ChaserEnemy : DefaultEnemy
 {
-    private float angle;
-    private AudioSource alertSound;
 
     void Start()
     {
@@ -24,8 +22,8 @@ public sealed class ChaserEnemy : DefaultEnemy
             sensors.Add(sensor);
         }
 
-        alertSound = GetComponent<AudioSource>();
-        alertSound.volume = 0.1f;
+        sound = GetComponent<AudioSource>();
+        sound.volume = 0.1f;
     }
 
     void Update()
@@ -42,12 +40,12 @@ public sealed class ChaserEnemy : DefaultEnemy
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
-        angle += Time.deltaTime*10;
-        if (angle >= 360) angle = 0;
-        float sinWave = (Mathf.Sin(angle)+1)/2;
+        angleEffect += Time.deltaTime*10;
+        if (angleEffect >= 360) angleEffect = 0;
+        float sinWave = (Mathf.Sin(angleEffect)+1)/2;
 
         sr.color = new Color(1, sinWave, sinWave, 1);
 
-        if(1-sinWave > 0.9f) alertSound.Play(0);
+        if(1-sinWave > 0.9f) sound.Play(0);
     }
 }
