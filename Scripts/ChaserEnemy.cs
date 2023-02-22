@@ -24,11 +24,13 @@ public sealed class ChaserEnemy : DefaultEnemy
 
         sound = GetComponent<AudioSource>();
         sound.volume = 0.1f;
+
+        UpdateDirection();
     }
 
     void Update()
     {
-        if (!stunned)
+        if (!stunned && playerTransform != null)
         {
             Navigate();
             UpdateDirection();

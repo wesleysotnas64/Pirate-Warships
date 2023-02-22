@@ -25,11 +25,13 @@ public sealed class ShooterEnemy : DefaultEnemy
         cannons = new List<GameObject>();
         GameObject cannon = gameObject.transform.GetChild(2).gameObject;
         cannons.Add(cannon);
+        
+        UpdateDirection();
     }
 
     void Update()
     {
-        if(!stunned)
+        if(!stunned && playerTransform != null)
         {
             if (!OnTarget())
                 Navigate();

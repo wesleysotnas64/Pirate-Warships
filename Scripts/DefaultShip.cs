@@ -49,5 +49,18 @@ public class DefaultShip : MonoBehaviour
         currentLife -= _damage;
         UpdateStatus();
         lifeBar.GetComponent<LifeBar>().UpdateScale((float)currentLife / maxLife);
+        Explode();
+    }
+
+    protected void Explode()
+    {
+        if(currentLife <= 0)
+        {
+            GameObject explosion = Resources.Load<GameObject>("ExplosionShip");
+            Instantiate(explosion, transform.position, transform.rotation );
+
+            Destroy(lifeBar);
+            Destroy(this.gameObject);
+        }
     }
 }
