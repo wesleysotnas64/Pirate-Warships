@@ -17,7 +17,7 @@ public class MenuCamera : MonoBehaviour
 
     private void UpdatePosition()
     {
-        transform.position = Vector3.Lerp(transform.position, target, 2*Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, target, 5*Time.deltaTime);
     }
 
     public void SetMenuAsTarget()
