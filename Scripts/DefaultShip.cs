@@ -59,6 +59,14 @@ public class DefaultShip : MonoBehaviour
             GameObject explosion = Resources.Load<GameObject>("ExplosionShip");
             Instantiate(explosion, transform.position, transform.rotation );
 
+            if(this.gameObject.tag == "Enemy")
+                GameObject.Find("GameController").GetComponent<GameController>().ToScore();
+            
+            if(this.gameObject.tag == "Player")
+            {
+                GameObject.Find("GameController").GetComponent<GameController>().SaveData();
+                GameObject.Find("GameController").GetComponent<GameController>().LoadNextScene("GameOver");
+            }
             Destroy(lifeBar);
             Destroy(this.gameObject);
         }

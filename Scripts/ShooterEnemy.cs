@@ -6,7 +6,7 @@ public sealed class ShooterEnemy : DefaultEnemy
     [SerializeField]
     private float shootingRadius;
     private void Start() {
-        maxLife = 5;
+        maxLife = 4;
         currentLife = maxLife;
         speed = 0.75f;
         curveRadius = 45;

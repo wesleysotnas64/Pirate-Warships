@@ -35,7 +35,7 @@ public class GameController : MonoBehaviour
         LoadData();
         
         currentScore = 0;
-        currentTime  = spawnTime;
+        currentTime  = gameTime;
 
         switch (sceneName)
         {

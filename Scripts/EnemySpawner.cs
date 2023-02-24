@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
             spawnPosition.Add(pos);
         }
 
-        spawnTime = 10;
+        spawnTime = PlayerPrefs.GetInt("SpawnTime");
         active = true;
     }
 

@@ -14,14 +14,14 @@ public sealed class PlayerShip : DefaultShip
         maxLife = 10;
         currentLife = maxLife;
         speed = 2;
-        curveRadius = 60;
+        curveRadius = 90;
         stunned = false;
         stranded = false;
         lastPosition = transform.position;
         currentSaveTime = 0;
         saveTime = 2;
         currentStunnedTime = 0;
-        stunnedTime = 2;
+        stunnedTime = 3;
         
         UpdateStatus();
 
@@ -36,7 +36,7 @@ public sealed class PlayerShip : DefaultShip
         }
 
         sound = GetComponent<AudioSource>();
-        sound.volume = 0.04f;
+        sound.volume = 0.1f;
         sound.pitch = 2;
     }
 
@@ -68,8 +68,6 @@ public sealed class PlayerShip : DefaultShip
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // if (!stunned)
-        // {
         string tag = other.gameObject.tag;
         switch (tag)
         {
@@ -86,7 +84,7 @@ public sealed class PlayerShip : DefaultShip
                 break;
 
         }
-        // }
+        
     }
 
     private void StrandedEffect()

@@ -6,7 +6,7 @@ public sealed class ChaserEnemy : DefaultEnemy
 
     void Start()
     {
-        maxLife = 5;
+        maxLife = 2;
         currentLife = maxLife;
         speed = 1;
         curveRadius = 45;
